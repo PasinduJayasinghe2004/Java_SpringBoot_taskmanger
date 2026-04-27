@@ -25,11 +25,11 @@ public class TaskService {
         return repository.findAll();
     }
 
-    public void deleteTask(int id) {
+    public void deleteTask(String id) {
         repository.deleteById(id);
     }
 
-    public Task getTaskById(int id) {
+    public Task getTaskById(String id) {
         return repository.findById(id).orElse(null);
     }
 

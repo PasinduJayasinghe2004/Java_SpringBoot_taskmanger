@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/tasks")
 public class TaskController {
     private final TaskService taskService;
@@ -27,12 +28,12 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public Task getTaskById(@PathVariable int id) {
+    public Task getTaskById(@PathVariable String id) {
         return taskService.getTaskById(id);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteTask(@PathVariable int id) {
+    public String deleteTask(@PathVariable String id) {
         taskService.deleteTask(id);
         return "Task deleted successfully";
     }
