@@ -1,24 +1,29 @@
 package com.example.taskmanager.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Document(collection = "tasks")
+@Entity
+@Table(name = "tasks")
 public class Task {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String title;
 
     public Task() {
     }
 
-    public Task(String id, String title) {
+    public Task(Long id, String title) {
         this.id = id;
         this.title = title;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
@@ -26,7 +31,7 @@ public class Task {
         return title;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

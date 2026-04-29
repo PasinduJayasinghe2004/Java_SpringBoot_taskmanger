@@ -1,8 +1,10 @@
 package com.example.taskmanager.Controller;
 
+import com.example.taskmanager.dto.TaskDTO;
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.service.TaskService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,30 +13,32 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/tasks")
 public class TaskController {
-    private final TaskService taskService;
+
+    @Autowired
+    private TaskService service;
 
     public TaskController(TaskService taskService) {
-        this.taskService = taskService;
+        this.service = service;
     }
 
     @PostMapping
-    public Task addTask(@RequestBody Task task) {
-        return taskService.addTask(task);
+    public TaskDTO addTask(@RequestBody Task task) {
+        return service.addTask(task);
     }
 
     @GetMapping
-    public List<Task> getTasks() {
-        return taskService.getAllTask();
+    public List<TaskDTO> getTasks() {
+        return service.getAllTask();
     }
 
     @GetMapping("/{id}")
-    public Task getTaskById(@PathVariable String id) {
-        return taskService.getTaskById(id);
+    public TaskDTO getTaskById(@PathVariable Long id) {
+        return service.getTaskById(id);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteTask(@PathVariable String id) {
-        taskService.deleteTask(id);
+    public String deleteTask(@PathVariable Long id) {
+        service.deleteTask(id);
         return "Task deleted successfully";
     }
 
