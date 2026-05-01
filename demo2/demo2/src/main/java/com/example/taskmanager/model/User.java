@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 import java.lang.annotation.Documented;
 
 
-@Document(collection="users");
+@Document(collection="users")
 public class User {
     @Id
     private String id;
