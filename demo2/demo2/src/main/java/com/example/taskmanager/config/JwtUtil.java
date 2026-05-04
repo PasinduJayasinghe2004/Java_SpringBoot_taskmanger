@@ -1,5 +1,6 @@
 package com.example.taskmanager.config;
 
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
@@ -19,5 +20,21 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256,SECRET)
                 .compact();
 
+    }
+    public String extractUsername(String token){
+        return Jwts.parser()
+                .setSigningKey(SECRET)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+
+    }
+    public boolean validateToken(String token){
+        try{
+            Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
+            return true;
+        }catch(JwtException e){
+            return false;
+        }
     }
 }

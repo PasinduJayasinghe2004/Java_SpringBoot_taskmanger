@@ -16,7 +16,10 @@ public class AuthService {
     @Autowired
     private JwtUtil jwtUtil;
 
+
     public String register(User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         repository.save(user);
         return "User registered successfully";
     }
